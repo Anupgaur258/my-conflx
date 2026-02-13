@@ -46,7 +46,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
       ...values,
       entryUrl: window.location.href,
       referral: document.referrer,
-      source: new URLSearchParams(window.location.search).get("source"),
+      source: new URLSearchParams(window.location.search).get("source") || "",
     }
 
     const res = await fetch("/api/submit", {
