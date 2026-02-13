@@ -77,7 +77,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
 }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-yellow-100 to-yellow-50">
+    <section className="py-20 bg-radial from-blue-50 from-14% to-yellow-100 ">
       <div className="max-w-2xl mx-auto px-4 text-center">
 
         {/* Badge  here */}
