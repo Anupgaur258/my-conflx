@@ -37,43 +37,71 @@ export default function Facilities() {
     },
   ]
 
+  const row1 = facilities.slice(0, 3)
+  const row2 = facilities.slice(3, 6)
+
+  const Card = ({ item }: any) => {
+    const Icon = item.icon
+    return (
+      <div className="min-w-[280px] bg-white p-6 rounded-2xl shadow-sm">
+        <div className="flex items-start gap-3 mb-3">
+          <Icon className="w-6 h-6 text-orange-500" />
+          <h3 className="font-semibold text-lg">{item.title}</h3>
+        </div>
+        <p className="text-sm text-gray-600">{item.desc}</p>
+      </div>
+    )
+  }
+
   return (
-    <section id="facilities" className="py-16 px-2 bg-gray-10">
+    <section id="facilities" className="py-16 px-4 bg-gray-50 overflow-hidden">
 
       <div className="max-w-7xl mx-auto bg-yellow-100 p-8 rounded-3xl">
 
-        {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Amenities & Facilities
         </h2>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Row 1 - LEFT */}
+        <div className="overflow-hidden mb-8">
+          <div className="flex gap-6 animate-slideLeft">
+            {[...row1, ...row1].map((item, index) => (
+              <Card key={index} item={item} />
+            ))}
+          </div>
+        </div>
 
-          {facilities.map((item, index) => {
-            const Icon = item.icon
-            return (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-2xl shadow-sm"
-              >
-                <div className="flex items-start gap-3 mb-3">
-                  <Icon className="w-6 h-6 text-orange-500" />
-                  <h3 className="font-semibold text-lg">
-                    {item.title}
-                  </h3>
-                </div>
-
-                <p className="text-sm text-gray-600">
-                  {item.desc}
-                </p>
-              </div>
-            )
-          })}
-
+        {/* Row 2 - RIGHT */}
+        <div className="overflow-hidden">
+          <div className="flex gap-6 animate-slideRight">
+            {[...row2, ...row2].map((item, index) => (
+              <Card key={index} item={item} />
+            ))}
+          </div>
         </div>
 
       </div>
+
+      {/* css here */}
+      <style jsx>{`
+        @keyframes slideLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        @keyframes slideRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+
+        .animate-slideLeft {
+          animation: slideLeft 15s linear infinite;
+        }
+
+        .animate-slideRight {
+          animation: slideRight 15s linear infinite;
+        }
+      `}</style>
 
     </section>
   )
