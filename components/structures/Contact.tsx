@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,14 +19,15 @@ import {
 } from "@/components/ui/form"
 
 const formSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  roomType: z.string().min(1, "Room type is required"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  name: z.string().min(2),
+  email: z.string().email(),
+  roomType: z.string().min(1),
+  message: z.string().min(10),
 })
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [source, setSource] = useState("")
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,66 +39,61 @@ export default function ContactForm() {
     },
   })
 
+  // Capture UTM once and store in cookie
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const utm = params.get("utm_source")
 
-async function onSubmit(values: z.infer<typeof formSchema>) {
-  try {
-    const data = {
-      
-      ...values,
-      entryUrl: window.location.href,
-      referral: document.referrer,
-      source: new URLSearchParams(window.location.search).get("source") || "",
+    if (utm) {
+      document.cookie = `utm_source=${utm}; path=/`
+      setSource(utm)
+    } else {
+      const match = document.cookie.match(/(^| )utm_source=([^;]+)/)
+      if (match) {
+        setSource(match[2])
+      }
+    }
+  }, [])
+
+  const onSubmit = async (data: any) => {
+    const entryUrl = window.location.href
+    const referral = document.referrer || ""
+
+    let finalSource = source
+
+    if (!finalSource) {
+      if (referral) {
+        try {
+          finalSource = new URL(referral).hostname
+        } catch {
+          finalSource = "Direct"
+        }
+      } else {
+        finalSource = "Direct"
+      }
     }
 
-    const res = await fetch("/api/submit", {
+    await fetch("/api/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        entryUrl,
+        referral,
+        source: finalSource,
+      }),
     })
 
-    const result = await res.json()
-
-    if (result.success) {
-      setSubmitted(true)
-      form.reset()
-
-      setTimeout(() => {
-        setSubmitted(false)
-      }, 4000)
-    } else {
-      alert("Something went wrong")
-    }
-
-  } catch (error) {
-    console.error(error)
-    alert("Error submitting form")
+    setSubmitted(true)
+    form.reset()
   }
-}
 
   return (
     <section className="py-20 bg-radial from-blue-50 from-14% to-yellow-100 ">
       <div className="max-w-2xl mx-auto px-4 text-center">
 
-        {/* Badge  here */}
-        <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow mb-6">
-          <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-          <span className="text-sm font-medium text-gray-700">
-            Get in touch
-          </span>
-        </div>
-
-        {/* Heading  h2 here*/}
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-          Let's Start a Conversation
-        </h2>
-
-        <p className="text-gray-600 mb-8">
-          Have a question or ready to take the next step? We'd love to hear from you.
-        </p>
-
-        {/* Success Message  Sent here*/}
         {submitted && (
           <div className="flex items-center gap-2 bg-green-100 text-green-700 px-4 py-3 rounded-lg mb-6 shadow">
             <CheckCircle className="w-5 h-5" />
@@ -105,13 +101,11 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
           </div>
         )}
 
-        {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-xl p-8 text-left">
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 
-              {/* Name + Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <FormField
@@ -144,7 +138,6 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
 
               </div>
 
-              {/* Room Type  here*/}
               <FormField
                 control={form.control}
                 name="roomType"
@@ -159,7 +152,6 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 )}
               />
 
-              {/* Message */}
               <FormField
                 control={form.control}
                 name="message"
@@ -167,18 +159,13 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                   <FormItem>
                     <FormLabel>Message *</FormLabel>
                     <FormControl>
-                      <Textarea
-                        rows={4}
-                        placeholder="How can we help you?"
-                        {...field}
-                      />
+                      <Textarea rows={4} placeholder="How can we help you?" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              {/* Submit Button Here */}
               <Button
                 type="submit"
                 className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-6 text-base rounded-xl"
