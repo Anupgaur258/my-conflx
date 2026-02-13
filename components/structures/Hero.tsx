@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card"
 export default function Hero() {
   return (
     <section id="hero" className="max-w-7xl mx-auto px-4 py-16 w-full">
-      <div className="grid md:grid-cols-2 gap-10 items-center bg-radial from-blue-50 from-50% to-yellow-100 p-6 md:p-12 rounded-xl">
+      <div className="grid md:grid-cols-2 gap-10 items-center bg-radial from-blue-50 from-14% to-yellow-100  p-6 md:p-12 rounded-xl">
 
         {/* Left Content */}
         <div className="text-center md:text-left space-y-6">
