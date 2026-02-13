@@ -31,7 +31,7 @@ export default function Amenities() {
   ]
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-16 text-center">
+    <section id="amenities" className="max-w-7xl mx-auto px-1 py-8 text-center">
         <div className="flex flex-col justify-center items-center">
       <h2 className="text-3xl font-bold mb-8">Why Choose Us</h2>
 <p className="text-gray mb-10"> We understand the importance of safety for women living away from home. Every aspect of our PG is designed with your security in mind.</p>
@@ -40,7 +40,7 @@ export default function Amenities() {
         {features.map((feature, i) => (
           <Card
             key={i}
-            className="hover:scale-105 transition-transform duration-300 shadow"
+            className="hover:scale-105 cursor-pointer transition-transform duration-300 shadow"
           >
             <CardHeader>
               <div className="text-3xl mb-2">{feature.icon}</div>

@@ -2,10 +2,10 @@ import Image from "next/image"
 
 export default function GridImage() {
   return (
-    <section className="py-20 bg-gray-100">
+    <section id="gallery" className="py-20 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4">
 
-        {/* Top Header */}
+        {/* Top Header  here*/}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             A Look Inside Our PG
@@ -19,13 +19,13 @@ export default function GridImage() {
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          {/* Left Tall Image */}
+          {/* Left Image */}
           <div className="relative h-[450px] rounded-2xl overflow-hidden">
             <Image
               src="/image.webp"
               alt="PG Balcony"
               fill
-              className="object-cover hover:scale-105 transition duration-500"
+              className="cursor-pointer object-cover hover:scale-105 transition duration-500"
             />
           </div>
 
@@ -36,7 +36,7 @@ export default function GridImage() {
                 src="/imagetwo.webp"
                 alt="PG Balcony Small"
                 fill
-                className="object-cover hover:scale-105 transition duration-500"
+                className="cursor-pointer object-cover hover:scale-105 transition duration-500"
               />
             </div>
 
@@ -45,18 +45,18 @@ export default function GridImage() {
                 src="/imagetwo.webp"
                 alt="PG Common Area"
                 fill
-                className="object-cover hover:scale-105 transition duration-500"
+                className="cursor-pointer object-cover hover:scale-105 transition duration-500"
               />
             </div>
           </div>
 
-          {/* Right Tall Image */}
+          {/* Right Image */}
           <div className="relative h-[450px] rounded-2xl overflow-hidden">
             <Image
               src="/image.webp"
               alt="PG Dining Area"
               fill
-              className="object-cover hover:scale-105 transition duration-500"
+              className="cursor-pointer object-cover hover:scale-105 transition duration-500"
             />
           </div>
 

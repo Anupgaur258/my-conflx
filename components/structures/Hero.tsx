@@ -5,8 +5,8 @@ import { Card } from "@/components/ui/card"
 
 export default function Hero() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-16 w-full">
-      <div className="grid md:grid-cols-2 gap-10 items-center bg-yellow-100 p-6 md:p-12 rounded-xl">
+    <section id="hero" className="max-w-7xl mx-auto px-4 py-16 w-full">
+      <div className="grid md:grid-cols-2 gap-10 items-center bg-radial from-blue-50 from-50% to-yellow-100 p-6 md:p-12 rounded-xl">
 
         {/* Left Content */}
         <div className="text-center md:text-left space-y-6">
@@ -35,8 +35,8 @@ export default function Hero() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-            <Button className="bg-blue-900 text-white">View Available Rooms</Button>
-            <Button variant="outline">Schedule a Call</Button>
+            <Button className="bg-blue-900 text-white cursor-pointer">View Available Rooms</Button>
+            <Button variant="outline" className="cursor-pointer">Schedule a Call</Button>
           </div>
 
           {/* Price, Rating, Trust */}
@@ -63,7 +63,7 @@ export default function Hero() {
             alt="PG Room"
             width={600}
             height={400}
-            className="object-cover w-full h-64 sm:h-72 md:h-96"
+            className="object-cover cursor-pointer w-full h-64 sm:h-72 md:h-96"
           />
         </Card>
       </div>

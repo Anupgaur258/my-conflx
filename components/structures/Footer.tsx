@@ -18,7 +18,7 @@ export default function Footer() {
               alt="Logo"
               width={120}
               height={50}
-              className="object-contain"
+              className="cursor-pointer object-contain"
             />
           </div>
 

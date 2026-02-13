@@ -38,9 +38,9 @@ export default function Facilities() {
   ]
 
   return (
-    <section className="py-16 px-4 bg-gray-100">
+    <section id="facilities" className="py-16 px-2 bg-gray-10">
 
-      <div className="max-w-6xl mx-auto bg-yellow-100 p-8 rounded-3xl">
+      <div className="max-w-7xl mx-auto bg-yellow-100 p-8 rounded-3xl">
 
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">

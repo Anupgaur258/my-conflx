@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import Navbar from "@/components/structures/Navbar"
+// import Navbar from "@/components/structures/Navbar"
 import Hero from "@/components/structures/Hero"
 import AvailableRooms from "@/components/structures/AvailableRooms"
 import Amenities from "@/components/structures/Amenities"
@@ -15,15 +15,15 @@ import Facilities from "@/components/structures/Facilities"
 
 export default function Home() {
   return (
-    <div>
+    <div className="scroll-smooth">
 
 
 
-<Navbar/>
+
 <Hero/>
  <AvailableRooms/>
 
- <Facilities/>  
+ <Facilities/>
 <Amenities/>
 <Highlight/>
 <GridImage/>

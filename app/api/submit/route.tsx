@@ -6,6 +6,22 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
 
+    // IP
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0] ||
+      "127.0.0.1"
+
+    //  Location here
+    let country = ""
+    let region = ""
+
+    try {
+      const geoRes = await fetch(`http://ip-api.com/json/${ip}`)
+      const geoData = await geoRes.json()
+      country = geoData.country || ""
+      region = geoData.regionName || ""
+    } catch (err) {}
+
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -16,7 +32,10 @@ export async function POST(req: Request) {
 
     const sheets = google.sheets({ version: "v4", auth })
 
-    const timestamp = new Date().toISOString()
+    // Timestamp here
+    const timestamp = new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+    })
 
     const values = [[
       timestamp,
@@ -24,14 +43,16 @@ export async function POST(req: Request) {
       body.email,
       body.roomType,
       body.message,
-      body.entryUrl,
-      body.referral,
-      body.source,
+      ip,
+      region && country ? `${region}, ${country}` : "",
+      body.entryUrl || "",
+      body.referral || "",
+      body.source || "",
     ]]
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Contact!A:H",
+      range: "Contact!A:J",
       valueInputOption: "USER_ENTERED",
       requestBody: { values },
     })

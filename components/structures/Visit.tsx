@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button"
 
 export default function Visit() {
   return (
-    <section className="py-20 bg-gray-100">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-20 bg-gray-10">
+      <div className="max-w-7xl mx-auto px-4">
 
         <div className="rounded-3xl bg-gradient-to-r from-yellow-100 via-yellow-100 to-yellow-200 p-12 md:p-16 shadow-xl text-center">
 
@@ -26,14 +26,15 @@ export default function Visit() {
             {/* WhatsApp Button */}
             <Button
               variant="outline"
-              className="px-6 py-6 text-base border-2 border-indigo-900 text-indigo-900 rounded-xl hover:bg-indigo-50"
+              className="cursor-pointer px-6 py-6 text-base border-2 border-indigo-900 text-indigo-900 rounded-xl hover:bg-indigo-50"
             >
-              Chat on WhatsApp
+              <a href="https://api.whatsapp.com/send?phone=+917078367901&text=YOUR_MESSAGE" target="_blank">Chat on whatsApp</a>
+
             </Button>
 
             {/* Schedule Button */}
             <Button
-              className="px-6 py-6 text-base bg-indigo-900 hover:bg-indigo-800 text-white rounded-xl"
+              className="cursor-pointer px-6 py-6 text-base bg-indigo-900 hover:bg-indigo-800 text-white rounded-xl"
             >
               Schedule a Visit
             </Button>

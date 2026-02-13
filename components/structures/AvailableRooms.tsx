@@ -45,11 +45,11 @@ export default function AvailableRooms() {
   ]
 
   return (
-    <section className="py-16 px-4 bg-gray-100">
+    <section id="rooms" className="py-16 px-4 bg-gray-10">
 
       <div className="max-w-7xl mx-auto">
 
-        {/* Header  here*/} 
+        {/* Header  here*/}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
           <h2 className="text-3xl md:text-4xl font-bold">
             Available Rooms
@@ -75,7 +75,7 @@ export default function AvailableRooms() {
                   src={room.image}
                   alt={room.title}
                   fill
-                  className="object-cover"
+                  className="object-cover cursor-pointer"
                 />
               </div>
 
@@ -104,7 +104,7 @@ export default function AvailableRooms() {
                     {room.price}
                   </p>
 
-                  <button className="text-blue-600 font-medium hover:underline">
+                  <button className=" cursor-pointer text-blue-600 font-medium hover:underline">
                     Book Visit
                   </button>
                 </div>
