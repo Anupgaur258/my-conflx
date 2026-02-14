@@ -128,4 +128,36 @@
     @apply bg-background text-foreground;
   }
 }
- 
+
+ .slider-container{
+width: 100%;
+overflow:visible;
+position : relative;
+ }
+
+.slider-tracker{
+animation: slide-left 10s linear infinite;
+}
+
+
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Adjust based on content width */
+    }
+}
+
+.slider-trackertwo{
+animation: slide-right 10s linear infinite;
+}
+
+ @keyframes slide-right {
+   0%{
+      transform: translateX(0);
+     } 100%{
+      transform: translateX(-50%);
+    }
+ }

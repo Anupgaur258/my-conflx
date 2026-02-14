@@ -104,8 +104,8 @@ export default function AvailableRooms() {
                     {room.price}
                   </p>
 
-                  <button className=" cursor-pointer text-blue-600 font-medium hover:underline">
-                    Book Visit
+                  <button className="no-underline cursor-pointer text-blue-600 font-medium hover:underline">
+                    Book Visit 
                   </button>
                 </div>
 

@@ -31,8 +31,11 @@ class SheetService {
   ) {
     await this.doc.loadInfo()
 
-
     const sheet = this.doc.sheetsByTitle["Dummy"]
+
+    if (!sheet) {
+      throw new Error('Sheet named "Dummy" not found')
+    }
 
     await sheet.addRow({
       Date: formatInTimeZone(
